@@ -4,14 +4,90 @@
 $(document).ready(function(){
 	
 
-	
-	var playerTurn = true;
-	var machineTurn = "";
+	//Just leave these extra variables for now
+    var machineTurn = "";
 	var algorithm = "";
 	var whosTurn = ""; 
+    
+    var playerTurn = true;
 	var buttonStatus = "allowclick"; // Change to inactive once game starts
-	
+//	var playerTurn = true;
+	var machineTurn = "";
+	var player = "";
+	var test = "";
+    
+    var gridObj = {rowA1: "", rowA2: "", rowA3: "",
+				   rowB1: "", rowB2: "", rowB3: "",
+				   rowC1: "", rowC2: "", rowC3: ""};
+    
+    
+    
+    
+    
+    
+    
 
+    
+    
+    
+    
+    
+    
+    $(".display").click(function() {
+        
+        gridObj = {rowA1: "", rowA2: "", rowA3: "",
+				   rowB1: "", rowB2: "", rowB3: "",
+				   rowC1: "", rowC2: "", rowC3: ""};
+        buttonStatus = "allowclick";
+        playerTurn = true;
+        
+    });
+    
+    
+    
+    
+    $(".left, .middle, .right").click(function() {
+        
+		if(buttonStatus === "inactive" && playerTurn === true) {
+            
+			$(this).html(player);
+			gridObj[this.id] = player;
+			playerTurn = false; 
+            
+		};
+        
+	}); // End left/middle/right click listener
+	
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	$(".button-left").click(function() {
 		if(buttonStatus === "allowclick") {	
 			buttonStatus = "inactive";
@@ -20,6 +96,8 @@ $(document).ready(function(){
 		};	
 	});
 
+    
+    
 	$(".button-right").click(function() {
 		if(buttonStatus === "allowclick") {
 			buttonStatus = "inactive";
@@ -28,22 +106,9 @@ $(document).ready(function(){
 		};
 	}); 
 
-    $(".left, .middle, .right").click(function() {
-		if(buttonStatus === "inactive" && playerTurn === true) {
-			$(this).html(player);
-			playerTurn = false; 
-		};
-	}); // End left/middle/right click listener
-	
-	$(".display").click(function() {
-		playerTurn = true;
-		buttonStatus = "allowclick";
-	});
     
     
-    
-    
-    
+
     
     
     
@@ -80,7 +145,20 @@ $(document).ready(function(){
 
 
 
-
+//    
+//    $(".left, .middle, .right").click(function() {
+//		
+//			$(this).html(player);
+//            
+//			gridObj[this.id] = player;
+//			console.log(gridObj);
+//
+////            buttonStatus = "inactive"
+//		
+//	}); // End left/middle/right click listener
+//    
+//    
+//    
 
 
 
