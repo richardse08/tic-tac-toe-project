@@ -1,188 +1,81 @@
+// TODO
+// Stop player from overrideing blocks that are already taken by machine
 
-$(document).ready(function(){
-	
+
+
+$(document).ready(function(){    
     var playerTurn = true;
-	var buttonStatus = "allowclick"; // Change to inactive once game starts
-	var player = "";
-	var machine = "";
-	var test = "";
-    
-    var gridObj = {0: "", 1: "", 2: "",
-				   3: "", 4: "", 5: "",
-				   6: "", 7: "", 8: ""};
-	var gridArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    var buttonStatus = "allowclick"; // Change to inactive once game starts
+    var player = "";
+    var machine = "";
+    var count = 0;
+    var rand = getRandomInt(1, 9);
 
+    var gridObj = {1: "X", 2: "", 3: "",
+				   4: "", 5: "", 6: "",
+				   7: "", 8: "", 9: ""};
 
-	function machineFunction(){
-		
-        if (gridObj[4] === "") {
-            var test4 = ('#' + 4 + '');			
-			$(test4).html(machine);
-			gridObj[4] = machine;
-			playerTurn = true;
-        } 
-		else if (gridObj[0] === "") {
-		var test0 = ('#' + 0 + '');			
-			$(test0).html(machine);
-			gridObj[0] = machine;
-			playerTurn = true;
-		}
-		else if (gridObj[2] === "") {
-		var test2 = ('#' + 2 + '');			
-			$(test2).html(machine);
-			gridObj[2] = machine;
-			playerTurn = true;
-		}
-		else if (gridObj[6] === "") {
-		var test6 = ('#' + 6 + '');			
-			$(test6).html(machine);
-			gridObj[6] = machine;
-			playerTurn = true;
-		}
-		else if (gridObj[8] === "") {
-			var test8 = ('#' + 8 + '');			
-			$(test2).html(machine);
-			gridObj[8] = machine;
-			playerTurn = true;
-		}
-
-        if ((gridObj[0] === machine && gridObj[1] === machine && gridObj[2] === machine) ||
-            (gridObj[3] === machine && gridObj[4] === machine && gridObj[5] === machine) ||
-            (gridObj[6] === machine && gridObj[7] === machine && gridObj[8] === machine) ||
-            (gridObj[0] === machine && gridObj[3] === machine && gridObj[6] === machine) ||
-            (gridObj[1] === machine && gridObj[4] === machine && gridObj[7] === machine) ||
-            (gridObj[2] === machine && gridObj[5] === machine && gridObj[8] === machine) ||
-            (gridObj[2] === machine && gridObj[4] === machine && gridObj[6] === machine) ||
-            (gridObj[0] === machine && gridObj[4] === machine && gridObj[8] === machine)){ 
-            console.log("You Lose!");
-            alert("You Lose!");
-            return;
-        };
-    };      
-            
-            
-            
-            
-          
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-	
-	
-
-	
-
-	
+    function machineFunction() {
+        // FIRST CHOICE - WIN
+        // Check if machine has two in a row anywhere in the grid and place a 3rd to get a full row
+        
+        $("#5").html(machine);
+		gridObj[5] = machine;
+        
+    }; // End machineFunction
     
     
-	
-	
-	
-	
-	
-    
-
     
     
     // This adds an X or O and also makes changes to the grid object
     $(".left, .middle, .right").click(function() {
-        
-		if(buttonStatus === "inactive" && playerTurn === true) {
-            
-			$(this).html(player);
-			gridObj[this.id] = player;
-			
-			// Check to see if there is a win/lose/tie
-			if(gridObj[0] === player && gridObj[1] === player && gridObj[2] === player) {
-				console.log("You Win!");
-				alert("You Win!");
-				return;
-			};
-			if(gridObj[3] === player && gridObj[4] === player && gridObj[5] === player) {
-				console.log("You Win!");
-				alert("You Win!");
-				return;
-			};
-			if(gridObj[6] === player && gridObj[7] === player && gridObj[8] === player) {
-				console.log("You Win!");
-				alert("You Win!");
-				return;
-			};
-			if(gridObj[0] === player && gridObj[3] === player && gridObj[6] === player) {
-				console.log("You Win!");
-				alert("You Win!");
-				return;
-			};
-			if(gridObj[1] === player && gridObj[4] === player && gridObj[7] === player) {
-				console.log("You Win!");
-				alert("You Win!");
-				return;
-			};
-			if(gridObj[2] === player && gridObj[5] === player && gridObj[8] === player) {
-				console.log("You Win!");
-				alert("You Win!");
-				return;
-			};
-			if(gridObj[2] === player && gridObj[4] === player && gridObj[6] === player) {
-				console.log("You Win!");
-				alert("You Win!");
-				return;
-			};
-			if(gridObj[0] === player && gridObj[4] === player && gridObj[8] === player) {
-				console.log("You Win!");
-				alert("You Win!");
-				return;
-			};
-			
+		if(buttonStatus === "inactive" && playerTurn === true && gridObj[this.id] === "") {
+            // Sends player to whatever was clicked
+			$(this).html(player); // Sends player over to html
+			gridObj[this.id] = player; // Update gridObj object
+            count++;
+            // Check if they won BEFORE we let machine go again
+            var checkWinner2 = myFunction(player);
+                if (checkWinner2 === "winner") {
+                    alert("You Have Won the Game!");
+                }
+            // Ensure that the player cant keep playing until machine goes
 			playerTurn = false; 
+            // Finished, now we can run machineFunction and testFxn
 			machineFunction();
-			
+            // testFxn(alpha, bravo, charlie);
 		};
-        
+        // testFxn(alpha, bravo, charlie);
 	}); // End left/middle/right click listener
-	
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-    
 
-    function randomMove(myMin, myMax) {
-		return Math.floor(
-			Math.random() * (myMax - myMin + 1)
-		) + myMin;
-	};
+    
+    
+    
+    // Function to check who won the game
+    function myFunction(checkWhoWon) {
+        
+        if ((gridObj[1] === checkWhoWon && gridObj[2] === checkWhoWon && gridObj[3] === checkWhoWon) ||
+            (gridObj[4] === checkWhoWon && gridObj[5] === checkWhoWon && gridObj[6] === checkWhoWon) ||
+            (gridObj[7] === checkWhoWon && gridObj[8] === checkWhoWon && gridObj[9] === checkWhoWon) ||
+            (gridObj[1] === checkWhoWon && gridObj[4] === checkWhoWon && gridObj[7] === checkWhoWon) ||
+            (gridObj[2] === checkWhoWon && gridObj[5] === checkWhoWon && gridObj[8] === checkWhoWon) ||
+            (gridObj[3] === checkWhoWon && gridObj[6] === checkWhoWon && gridObj[9] === checkWhoWon) ||
+            (gridObj[3] === checkWhoWon && gridObj[5] === checkWhoWon && gridObj[7] === checkWhoWon) ||
+            (gridObj[1] === checkWhoWon && gridObj[5] === checkWhoWon && gridObj[9] === checkWhoWon)){ 
+            return "winner";
+            
+        };
+        
+    };
     
     
     
     
-    
-	$(".display").click(function() { // Reset grid, reset message, remove X/Os from html, re-allow clicks
-		gridObj = {0: "", 1: "", 2: "",
-				   3: "", 4: "", 5: "",
-				   6: "", 7: "", 8: ""};
-		$("#0").html("");
+    // Reset grid, reset message, remove X/Os from html, re-allow clicks
+	$(".display").click(function() { 
+		gridObj = {1: "", 2: "", 3: "",
+				   4: "", 5: "", 6: "",
+				   7: "", 8: "", 9: ""};
 		$("#1").html("");
 		$("#2").html("");
 		$("#3").html("");
@@ -191,20 +84,11 @@ $(document).ready(function(){
 		$("#6").html("");
 		$("#7").html("");
 		$("#8").html("");
+		$("#9").html("");
 		$(".display").html("Let's Play! Xs or Os?");
 		buttonStatus = "allowclick";
 		playerTurn = true;
 	});
-    
-    
-    
-    
-    
- 
-    
-    
-    
-    
     
     
     
@@ -215,9 +99,10 @@ $(document).ready(function(){
 			player = "X";
 			machine = "O";
 			$(".display").html("Click to Restart");
-		};	
+		}
 	});
 
+    
     
     
 	$(".button-right").click(function() {
@@ -226,22 +111,10 @@ $(document).ready(function(){
 			player = "O";
 			machine = "X";
 			$(".display").html("Click to Restart");
-		};
-	}); 
+		}
+	});     
 
     
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }); // End of doc ready
