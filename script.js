@@ -9,20 +9,51 @@ $(document).ready(function(){
     var player = "";
     var machine = "";
     var count = 0;
-    var rand = getRandomInt(1, 9);
-
-    var gridObj = {1: "X", 2: "", 3: "",
+    var gridObj = {1: "", 2: "", 3: "",
 				   4: "", 5: "", 6: "",
 				   7: "", 8: "", 9: ""};
 
-    function machineFunction() {
-        // FIRST CHOICE - WIN
-        // Check if machine has two in a row anywhere in the grid and place a 3rd to get a full row
+   
+
+    
+    var gridArr = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]];
+    
+    
+    // First create a simple function that grabs ONE item at i=0 and check if its taken or not
+    function machineCode() {
         
-        $("#5").html(machine);
-		gridObj[5] = machine;
+        var rand = Math.floor((Math.random() * 9) + 1);
         
-    }; // End machineFunction
+        if(gridObj[rand] === "") {
+            $("#" + rand + "").html(machine);
+            gridObj[rand] = machine;
+            console.log(machine);
+        } else machineCode;
+        
+        playerTurn = true;
+        
+    };
+   
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -31,6 +62,7 @@ $(document).ready(function(){
     $(".left, .middle, .right").click(function() {
 		if(buttonStatus === "inactive" && playerTurn === true && gridObj[this.id] === "") {
             // Sends player to whatever was clicked
+            console.log("inside of left middle right");
 			$(this).html(player); // Sends player over to html
 			gridObj[this.id] = player; // Update gridObj object
             count++;
@@ -42,7 +74,8 @@ $(document).ready(function(){
             // Ensure that the player cant keep playing until machine goes
 			playerTurn = false; 
             // Finished, now we can run machineFunction and testFxn
-			machineFunction();
+            console.log(gridObj);
+			machineCode();
             // testFxn(alpha, bravo, charlie);
 		};
         // testFxn(alpha, bravo, charlie);
