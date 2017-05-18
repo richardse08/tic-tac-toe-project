@@ -8,40 +8,103 @@ $(document).ready(function(){
     var buttonStatus = "allowclick"; // Change to inactive once game starts
     var player = "";
     var machine = "";
-    var count = 0;
     var gridObj = {1: "", 2: "", 3: "",
 				   4: "", 5: "", 6: "",
 				   7: "", 8: "", 9: ""};
 
+    var gridArr = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]];
+    
+    function machineCode() {
+        
+        for(i = 0; i < gridArr.length; i++) {
+            
+            var one = gridArr[i][0];
+            var two = gridArr[i][1];
+            var three = gridArr[i][2];
+          
+            testFxn(one, two, three);
+       
+                function testFxn(one, two, three) {
+
+                    var test = [gridObj[one], gridObj[two], gridObj[three]];
+
+                    if (test[0] === "X" && test[2] === "X" && test[1] === "") {
+                        $('#' + two + '').html(machine);
+                        gridObj[two] = machine;
+                        playerTurn = true;
+                        return;
+                    }
+                    else if (test[0] === "X" && test[1] === "X" && test[2] === "") {
+                        $('#' + three + '').html(machine);
+                        gridObj[three] = machine;
+                        playerTurn = true;
+                        return;
+                    }
+                    else if (test[1] === "X" && test[2] === "X" && test[0] === "") {
+                        $('#' + one + '').html(machine);
+                        gridObj[one] = machine;
+                        playerTurn = true;
+                        return;
+                    }
+                    else if (test[0] === "O" && test[2] === "O" && test[1] === "") {
+                        $('#' + two + '').html(machine);
+                        gridObj[two] = machine;
+                        playerTurn = true;
+                        return;
+                    }
+                    else if (test[0] === "O" && test[1] === "O" && test[2] === "") {
+                        $('#' + three + '').html(machine);
+                        gridObj[three] = machine;
+                        playerTurn = true;
+                        return;
+                    }
+                    else if (test[1] === "O" && test[2] === "O" && test[0] === "") {
+                        $('#' + one + '').html(machine);
+                        gridObj[one] = machine;
+                        playerTurn = true;
+                        return;
+                    }
+
+                }; 
+            
+        };  
+        
+        randFxn();
+        
+        
+    
+        function randFxn() {
+
+            var rand = Math.floor(Math.random() * (8)) + 1; 
+            if (gridObj[rand] === "") {
+                gridObj[rand] = machine;
+                $('#' + rand + '').html(machine);
+                console.log("rand fired");
+                playerTurn = true;
+            }
+            else randFxn();
+
+        };
+
+        
+        
+        var checkWinner2 = myFunction(machine);
+        
+        if (checkWinner2 === "winner") {
+            alert("You Have Lost the Game!");
+            buttonClick = "inactive";
+        }
+        
+    }; 
    
 
     
-    var gridArr = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]];
-    
-    
-    // First create a simple function that grabs ONE item at i=0 and check if its taken or not
-    function machineCode() {
-        
-        var rand = Math.floor((Math.random() * 9) + 1);
-        
-        if(gridObj[rand] === "") {
-            $("#" + rand + "").html(machine);
-            gridObj[rand] = machine;
-            console.log(machine);
-        } else machineCode;
-        
-        playerTurn = true;
-        
-    };
-   
     
     
     
     
     
     
-    
-   
     
     
     
@@ -62,19 +125,15 @@ $(document).ready(function(){
     $(".left, .middle, .right").click(function() {
 		if(buttonStatus === "inactive" && playerTurn === true && gridObj[this.id] === "") {
             // Sends player to whatever was clicked
-            console.log("inside of left middle right");
 			$(this).html(player); // Sends player over to html
 			gridObj[this.id] = player; // Update gridObj object
-            count++;
-            // Check if they won BEFORE we let machine go again
             var checkWinner2 = myFunction(player);
-                if (checkWinner2 === "winner") {
-                    alert("You Have Won the Game!");
-                }
-            // Ensure that the player cant keep playing until machine goes
+            if (checkWinner2 === "winner") {
+                alert("You Have Won the Game!");
+                buttonClick = "inactive";
+            }
 			playerTurn = false; 
             // Finished, now we can run machineFunction and testFxn
-            console.log(gridObj);
 			machineCode();
             // testFxn(alpha, bravo, charlie);
 		};
@@ -95,7 +154,9 @@ $(document).ready(function(){
             (gridObj[3] === checkWhoWon && gridObj[6] === checkWhoWon && gridObj[9] === checkWhoWon) ||
             (gridObj[3] === checkWhoWon && gridObj[5] === checkWhoWon && gridObj[7] === checkWhoWon) ||
             (gridObj[1] === checkWhoWon && gridObj[5] === checkWhoWon && gridObj[9] === checkWhoWon)){ 
-            return "winner";
+            // return "winner";
+            alert(checkWhoWon + " has won the game!");
+            buttonStatus = "inactive";
             
         };
         
