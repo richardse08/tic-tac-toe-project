@@ -54,6 +54,7 @@ $(document).ready(function(){
 					playerTurn = true;
 					return true;
 				}
+                else randFunction();
 
 			}; // End function randFunction() {
 
@@ -117,7 +118,7 @@ $(document).ready(function(){
 				alert("You Have Lost the Game!");
 			} 
 			else {
-				playerFunction();	
+				playerTurn = true;
 			}
 			
         
