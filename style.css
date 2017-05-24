@@ -1,6 +1,6 @@
 .ttt {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
     margin-top: 50px;
 }
 
@@ -19,8 +19,8 @@
 
 
 .left {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin: auto;
     border-top: solid;
     border-color: teal;
@@ -28,12 +28,12 @@
 	font-size: 100px;
 	text-align: center;
 	vertical-align: middle;
-	line-height: 200px;
+	line-height: 150px;
 }
 
 .middle {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin: auto;
     border-top: solid;
     border-bottom: solid;
@@ -43,12 +43,12 @@
 	font-size: 100px;
 	text-align: center;
 	vertical-align: middle;
-	line-height: 200px;
+	line-height: 150px;
 }
 
 .right {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin: auto;
     border-bottom: solid;
     border-color: teal;
@@ -56,7 +56,7 @@
 	font-size: 100px;
 	text-align: center;
 	vertical-align: middle;
-	line-height: 200px;
+	line-height: 150px;
 }
 
 .border-left {
@@ -71,12 +71,12 @@
 
 .button-left, .button-right {
 	text-align: center;
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 	width: 55px;
 	height: 50px;
 	border: solid;
 	border-color: teal;
-	margin-left: 10px;
+	margin-left: 5px;
 }
 
 .display {
@@ -87,6 +87,6 @@
 	height: 50px;
 	border: solid;
 	border-color: teal;
-	margin-left: 125px;
-	margin-right: 10px;
+	margin-left: 70px;
+	margin-right: 5px;
 }

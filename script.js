@@ -65,42 +65,42 @@ $(document).ready(function(){
 
 					var test = [gridObj[one], gridObj[two], gridObj[three]];
 
-					if (test[0] === "X" && test[2] === "X" && test[1] === "") {
+					if (test[0] === machine && test[1] === machine && test[1] === "") {
 						$('#' + two + '').html(machine);
 						gridObj[two] = machine;
 						console.log("conditional fired");
 						playerTurn = true;
 						return true;
 					}
-					else if (test[0] === "X" && test[1] === "X" && test[2] === "") {
+					else if (test[0] === machine && test[2] === machine && test[2] === "") {
 						$('#' + three + '').html(machine);
 						gridObj[three] = machine;
 						console.log("conditional fired");
 						playerTurn = true;
 						return true;
 					}
-					else if (test[1] === "X" && test[2] === "X" && test[0] === "") {
+					else if (test[1] === machine && test[2] === machine && test[0] === "") {
 						$('#' + one + '').html(machine);
 						gridObj[one] = machine;
 						console.log("conditional fired");
 						playerTurn = true;
 						return true;
 					}
-					else if (test[0] === "O" && test[2] === "O" && test[1] === "") {
+					else if (test[0] === player && test[1] === player && test[1] === "") {
 						$('#' + two + '').html(machine);
 						gridObj[two] = machine;
 						console.log("conditional fired");
 						playerTurn = true;
 						return true;
 					}
-					else if (test[0] === "O" && test[1] === "O" && test[2] === "") {
+					else if (test[0] === player && test[2] === player && test[2] === "") {
 						$('#' + three + '').html(machine);
 						gridObj[three] = machine;
 						console.log("conditional fired");
 						playerTurn = true;
 						return true;
 					}
-					else if (test[1] === "O" && test[2] === "O" && test[0] === "") {
+					else if (test[1] === player && test[2] === player && test[0] === "") {
 						$('#' + one + '').html(machine);
 						gridObj[one] = machine;
 						console.log("conditional fired");
