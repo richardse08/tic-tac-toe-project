@@ -14,8 +14,11 @@ $(document).ready(function(){
     // Define winning scenarios
     var winningMoves = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]];
 
+    
+    
     // Function that allows computer to look through board and decide what move to make 
     function machineCode() {
+        
             // Loop through winning scenarios and run them through checkForMoves
 			for(i = 0; i < winningMoves.length; i++) {
                 // Initialize 3 variables for looping through the winningMoves list
@@ -31,10 +34,12 @@ $(document).ready(function(){
 				}
                 
 			};
+        
             // If checkForMoves doesn't return any defensive moves, pick a random box that isn't already taken
 			if (check != true) {
 				generateRandom();
 			}
+        
 		    // Pick a random move
 			function generateRandom() {
                 
@@ -107,6 +112,8 @@ $(document).ready(function(){
 			
     }; // End function machineCode() 
 	
+    
+    
     // Player clicks a box     
     $(".left, .middle, .right").click(function() {
         // If player clicks an empty box, update that box in html AND update the gridObj to keep track of the board
@@ -126,6 +133,8 @@ $(document).ready(function(){
         }; 
 
     }); // End left/middle/right click listener
+    
+    
     
     // Compare the current grid to possible wins
     function winner(checkWhoWon) {
@@ -152,6 +161,8 @@ $(document).ready(function(){
         
     };
     
+    
+    
     // If player clicks restart remove all XOs from board and from grid object
 	$(".display").click(function() { 
         
@@ -175,7 +186,6 @@ $(document).ready(function(){
     
     
     
-    
     // Play as X
 	$(".button-left").click(function() {
         
@@ -188,6 +198,8 @@ $(document).ready(function(){
         
 	});
 
+    
+    
     // Play as O
 	$(".button-right").click(function() {
         
